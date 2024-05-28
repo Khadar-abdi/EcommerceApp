@@ -1,21 +1,27 @@
+import Loader from "@/components/Loader";
 import Products from "../components/Products"
 // import product from "../product.jsx"
-import  {useGetProductQuery}  from '../slices/productApiSlice'
+import { useGetProductsQuery } from "../slices/productApiSlice";
+import Message from "@/components/message";
 
 
 const HomeScreen = () => {
 
-    const { data: products, isLoading, error } = useGetProductQuery();
+    const { data: products, isLoading, error } = useGetProductsQuery();
 
  
+  
 
     return (
 
         <>
             {isLoading ? (
-                <h2> Loading...</h2>
+                <div className="flex justify-center items-center  "><Loader /></div>
             ) : error ? (
-                <div> {error?.error || error?.data?.message}</div>
+                <Message variant='danger'>
+
+                     {error?.error || error?.data?.message}
+                </Message>
             ) : (
                 <>
                     <div className="flex justify-center items-center   flex-col flex-wrap py-4 ">
