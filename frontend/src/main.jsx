@@ -13,6 +13,14 @@ import {
 } from 'react-router-dom'
 import HomeScreen from './Screens/HomeScreen'
 import ProductScreen from './Screens/ProductScreen'
+import CartScreen from './Screens/cartScreen'
+import LoginScreen from './Screens/LoginScreen'
+import RegisterScreen from './Screens/RegisterScreen'
+import ShippingScreen from './Screens/ShippingScreen'
+import PrivateRoute from './Screens/PrivateRoute'
+import PaymentScreen from './Screens/paymentScreen'
+import PlaceOrderScreen from './Screens/PlaceOrderScreen'
+
 
  
 
@@ -22,6 +30,17 @@ const router= createBrowserRouter(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/' element={<HomeScreen/>}/>
       <Route   path='/product/:id' element={<ProductScreen/>}/>
+      <Route   path='/cart' element={<CartScreen/>}/>
+      <Route   path='/login' element={<LoginScreen/>}/>
+      <Route   path='/register' element={<RegisterScreen/>}/>
+      
+      <Route path='' element={<PrivateRoute/>}>
+      <Route   path='/shipping' element={<ShippingScreen/>}/>
+      <Route   path='/payment' element={<PaymentScreen/>}/>
+      <Route   path='/placeorder' element={<PlaceOrderScreen/>}/>
+      
+      </Route>
+
     </Route>
   )
 )

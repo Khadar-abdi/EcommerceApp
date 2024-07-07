@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { UpdateCart } from "../Utils/cartUtils";
 
 
 
-const initialState = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : { cartItems: [] };
-const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
-};
+
+const initialState = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : { cartItems: [], shippingAddress: {}, paymentMethod: 'paypal' };
+
 
 
 const cartSlice = createSlice({
@@ -23,28 +23,30 @@ const cartSlice = createSlice({
                 state.cartItems = [...state.cartItems, item]
             }
 
+            return UpdateCart(state)
 
-            // calculate Item price
-
-            state.ItemPrice = addDecimals(state.cartItems.reduce((previousValue, item) => previousValue + item.price * item.qty, 0))
-
-            // calculate delivery
-
-            state.ItemDelivery = addDecimals(state.item.price > 100 ? 0 : 3)
-
-            // calculate tax 
-
-            // calcualte total price
-
-            state.totalPrice = (
-                Number(state.ItemPrice) +
-                Number(state.ItemDelivery)
-            ).toFixed(2)
-
-            localStorage.setItem('cart', JSON.stringify(state))
         },
+        removeFromCart: (state, action) => {
+            state.cartItems = state.cartItems.filter((x) => x._id !== action.payload)
+
+            return UpdateCart(state)
+        },
+        saveShippingAddress: (state, action) => {
+            state.shippingAddress = action.payload;
+            return UpdateCart(state)
+
+        },
+        savePaymentMethod: (state, action) => {
+            state.paymentMethod = action.payload;
+            return UpdateCart(state)
+
+        },
+        clearCartItems: (state, action) => {
+            state.cartItems = []
+            return UpdateCart(state)
+        }
     },
 });
 
-export const addToCart = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, clearCartItems } = cartSlice.actions;
 export default cartSlice.reducer;

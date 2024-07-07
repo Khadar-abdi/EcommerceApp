@@ -1,8 +1,8 @@
-import Loader from "@/components/Loader";
+import Loader from "../components/Loader";
 import Products from "../components/Products"
 // import product from "../product.jsx"
 import { useGetProductsQuery } from "../slices/productApiSlice";
-import Message from "@/components/message";
+import Message from "../components/message";
 
 
 const HomeScreen = () => {

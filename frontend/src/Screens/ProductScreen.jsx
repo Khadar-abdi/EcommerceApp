@@ -1,12 +1,12 @@
 
 import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom";
-import Rating from "@/components/rating"; 
+import Rating from "../components/rating"; 
 import { useState } from "react"; 
 import { useDispatch } from "react-redux";
 import { useGetProductDetailsQuery } from "../slices/productApiSlice";
-import Loader from "@/components/Loader";
-import Message from "@/components/message";
+import Loader from "../components/Loader";
+import Message from "../components/message";
 import { Button, Form } from "react-bootstrap";
 import  {addToCart}  from "../slices/cartSlice";
 
@@ -21,7 +21,7 @@ const ProductScreen = () => {
     const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
     const addToCartHandler = ()=>{  
       
-      dispatch(addToCart({...product, qty }))
+      console.log(dispatch(addToCart({...product, qty })))
       navigate('/cart')
          
     }

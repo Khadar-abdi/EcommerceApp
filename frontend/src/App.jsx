@@ -1,7 +1,9 @@
 import { Container } from "react-bootstrap"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
- 
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Outlet } from "react-router-dom"
 
 
@@ -9,7 +11,7 @@ const App = () => {
   return (
     <>
     <Header/>
-    <main  >
+    <main className="h-screen" >
       <Container>       
       <Outlet/>
       </Container>
@@ -18,7 +20,7 @@ const App = () => {
     </main>
 
     <Footer  />
-    
+    <ToastContainer/>
     </>
    
   )

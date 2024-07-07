@@ -11,8 +11,9 @@ const getProductByID = asyncHandler(async(req, res) => {
 
     if (product) {
 
-        res.json(product)
+        return res.json(product)
     }
+
 
     res.status(404).json({ message: 'product not found' });
 });
